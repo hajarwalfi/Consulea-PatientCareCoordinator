@@ -30,7 +30,6 @@ public class ConsultationMedicalAct {
         this.quantity = 1;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

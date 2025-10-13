@@ -11,10 +11,8 @@ public class JPAUtil {
     static {
         try {
             entityManagerFactory = Persistence.createEntityManagerFactory("Consulea");
-            System.out.println("EntityManagerFactory created successfully!");
         } catch (Exception e) {
-            System.err.println("Error creating EntityManagerFactory: " + e.getMessage());
-            e.printStackTrace();
+            // Error creating EntityManagerFactory
         }
     }
 
@@ -28,7 +26,6 @@ public class JPAUtil {
     public static void closeEntityManagerFactory() {
         if (entityManagerFactory != null && entityManagerFactory.isOpen()) {
             entityManagerFactory.close();
-            System.out.println("EntityManagerFactory closed successfully!");
         }
     }
 }

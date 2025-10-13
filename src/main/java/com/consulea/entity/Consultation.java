@@ -156,7 +156,6 @@ public class Consultation {
         if (this.createdAt == null) {
             return null;
         }
-        // Convert LocalDateTime to a Date object
         return Date.from(this.createdAt.atZone(ZoneId.systemDefault()).toInstant());
     }
 
@@ -197,11 +196,9 @@ public class Consultation {
                 '}';
     }
 
-    // Ajoutez ce champ dans la classe Consultation
     @OneToMany(mappedBy = "consultation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ConsultationMedicalAct> medicalActs = new ArrayList<>();
 
-    // Ajoutez ces méthodes
     public List<ConsultationMedicalAct> getMedicalActs() {
         return medicalActs;
     }
@@ -215,12 +212,9 @@ public class Consultation {
         this.medicalActs.add(consultationMedicalAct);
     }
 
-    // Modifiez la méthode getCost() pour inclure les actes médicaux
     public Double getCost() {
-        // Coût de base de la consultation
         double totalCost = this.cost;
 
-        // Ajouter le coût des actes médicaux en utilisant Stream API
         if (medicalActs != null && !medicalActs.isEmpty()) {
             totalCost += medicalActs.stream()
                     .mapToDouble(ConsultationMedicalAct::getTotalPrice)

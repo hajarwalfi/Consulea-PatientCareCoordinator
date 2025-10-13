@@ -1,6 +1,7 @@
 package com.consulea.dao;
 
 import com.consulea.entity.Patient;
+import com.consulea.enums.PatientStatus;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
@@ -35,10 +36,11 @@ public class PatientDAO extends GenericDAO<Patient> {
             LocalDateTime startOfDay = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
             LocalDateTime endOfDay = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59);
 
-            String jpql = "SELECT p FROM Patient p WHERE p.registeredAt BETWEEN :start AND :end ORDER BY p.registeredAt ASC";
+            String jpql = "SELECT p FROM Patient p WHERE p.registeredAt BETWEEN :start AND :end AND p.status = :status ORDER BY p.registeredAt ASC";
             TypedQuery<Patient> query = em.createQuery(jpql, Patient.class);
             query.setParameter("start", startOfDay);
             query.setParameter("end", endOfDay);
+            query.setParameter("status", PatientStatus.WAITING);
             return query.getResultList();
         } finally {
             em.close();

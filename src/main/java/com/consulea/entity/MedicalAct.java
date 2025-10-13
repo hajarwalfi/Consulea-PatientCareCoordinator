@@ -27,7 +27,6 @@ public class MedicalAct {
         this.price = price;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
