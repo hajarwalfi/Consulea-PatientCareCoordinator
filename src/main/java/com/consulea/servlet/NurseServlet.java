@@ -76,7 +76,6 @@ public class NurseServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Patient> todayPatients = nurseService.getTodayPatientsWithVitalSigns();
         
-        // Créer une Map pour associer chaque patient à ses derniers signes vitaux
         java.util.Map<Long, VitalSigns> latestVitalSignsMap = new java.util.HashMap<>();
         for (Patient patient : todayPatients) {
             VitalSigns latestVitalSigns = nurseService.getLatestVitalSigns(patient);
@@ -92,7 +91,6 @@ public class NurseServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Patient> patients = nurseService.getTodayPatientsWithVitalSigns();
         
-        // Créer une Map pour associer chaque patient à ses derniers signes vitaux
         java.util.Map<Long, VitalSigns> latestVitalSignsMap = new java.util.HashMap<>();
         for (Patient patient : patients) {
             VitalSigns latestVitalSigns = nurseService.getLatestVitalSigns(patient);
