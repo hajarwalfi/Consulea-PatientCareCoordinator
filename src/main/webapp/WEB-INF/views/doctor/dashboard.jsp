@@ -6,360 +6,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de Bord - Médecin Généraliste</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fa;
-        }
-
-        .navbar {
-            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .navbar-brand {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .navbar-user {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .btn-logout {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-
-        .btn-logout:hover {
-            background: rgba(255,255,255,0.3);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .welcome-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-        }
-
-        .welcome-card h2 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #28a745;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .stat-icon {
-            font-size: 48px;
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-        }
-
-        .stat-icon.blue {
-            background: #e3f2fd;
-        }
-
-        .stat-icon.orange {
-            background: #fff3e0;
-        }
-
-        .stat-icon.green {
-            background: #e8f5e9;
-        }
-
-        .stat-info h3 {
-            font-size: 32px;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .stat-info p {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .action-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .action-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .action-card-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .action-card h3 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .section-title {
-            color: #333;
-            font-size: 20px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .consultations-grid {
-            display: grid;
-            gap: 20px;
-        }
-
-        .consultation-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .consultation-info h4 {
-            color: #2193b0;
-            margin-bottom: 10px;
-        }
-
-        .consultation-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .badge-warning {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .badge-info {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .badge-success {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .btn {
-            padding: 8px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: #2193b0;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #1a7a91;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-        }
-    </style>
+    </script>
 </head>
-<body>
-<nav class="navbar">
-    <div class="navbar-brand">🏥 Consulea - Médecin Généraliste</div>
-    <div class="navbar-user">
-        <span>Dr. ${sessionScope.userName}</span>
-        <a href="${pageContext.request.contextPath}/logout" class="btn-logout">Déconnexion</a>
-    </div>
-</nav>
-
-<div class="container">
-    <c:if test="${not empty sessionScope.success}">
-        <div class="success-message">
-                ${sessionScope.success}
-            <c:remove var="success" scope="session"/>
-        </div>
-    </c:if>
-
-    <div class="welcome-card">
-        <h2>Tableau de Bord</h2>
-        <p>Bienvenue Dr. ${sessionScope.userName}. Gérez vos consultations et vos patients.</p>
-    </div>
-
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-icon blue">📋</div>
-            <div class="stat-info">
-                <h3>${myConsultations.size()}</h3>
-                <p>Mes Consultations</p>
-            </div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-icon orange">⏳</div>
-            <div class="stat-info">
-                <h3>${inProgressConsultations.size()}</h3>
-                <p>En Cours</p>
-            </div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-icon green">👨‍⚕️</div>
-            <div class="stat-info">
-                <h3>${waitingForSpecialist.size()}</h3>
-                <p>Attente Spécialiste</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="actions">
-        <a href="${pageContext.request.contextPath}/doctor/waiting-patients" class="action-card">
-            <div class="action-card-icon">🩺</div>
-            <h3>Patients en Attente</h3>
-            <p>Voir les patients et créer une consultation</p>
-        </a>
-    </div>
-
-    <h3 class="section-title">Consultations en Cours</h3>
-    <div class="consultations-grid">
-        <c:choose>
-            <c:when test="${not empty inProgressConsultations}">
-                <c:forEach var="consultation" items="${inProgressConsultations}">
-                    <div class="consultation-card">
-                        <div class="consultation-info">
-                            <h4>${consultation.patient.fullName}</h4>
-                            <div class="consultation-details">
-                                <span>📅 ${consultation.createdAt.toLocalDate()}</span>
-                                <span>🕐 ${consultation.createdAt.toLocalTime().toString().substring(0, 5)}</span>
-                                <span class="badge badge-info">${consultation.status}</span>
-                                <span>💰 ${consultation.cost} DH</span>
-                            </div>
-                            <p style="margin-top: 10px; color: #666;">
-                                <strong>Motif:</strong> ${consultation.chiefComplaint}
-                            </p>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="bg-white/20 p-2 rounded-lg">
+                            🏥
                         </div>
                         <div>
-                            <a href="${pageContext.request.contextPath}/doctor/view-consultation/${consultation.id}"
-                               class="btn btn-primary">Voir Détails</a>
+                            <h1 class="text-xl font-bold text-white">Consulea</h1>
+                            <p class="text-xs text-blue-100">Médecin Généraliste</p>
                         </div>
                     </div>
-                </c:forEach>
-            </c:when>
-            <c:otherwise>
-                <div class="empty-state">
-                    <p>Aucune consultation en cours</p>
                 </div>
-            </c:otherwise>
-        </c:choose>
-    </div>
-
-    <c:if test="${not empty waitingForSpecialist && waitingForSpecialist.size() > 0}">
-        <h3 class="section-title" style="margin-top: 30px;">En Attente d'Avis Spécialiste</h3>
-        <div class="consultations-grid">
-            <c:forEach var="consultation" items="${waitingForSpecialist}">
-                <div class="consultation-card">
-                    <div class="consultation-info">
-                        <h4>${consultation.patient.fullName}</h4>
-                        <div class="consultation-details">
-                            <span>📅 ${consultation.createdAt.toLocalDate()}</span>
-                            <span class="badge badge-warning">ATTENTE SPÉCIALISTE</span>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 text-white">
+                        <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                            👨‍⚕️
                         </div>
+                        <span class="font-medium">Dr. ${sessionScope.userName}</span>
+                    </div>
+                    <a href="${pageContext.request.contextPath}/logout" 
+                       class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Déconnexion</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Success Message -->
+        <c:if test="${not empty sessionScope.success}">
+            <div class="bg-green-50 border border-green-200 text-green-800 px-6 py-4 rounded-xl mb-6 flex items-center shadow-sm">
+                <svg class="w-5 h-5 mr-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                ${sessionScope.success}
+                <c:remove var="success" scope="session"/>
+            </div>
+        </c:if>
+
+        <!-- Welcome Card -->
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 p-8 mb-8">
+            <div class="flex items-center space-x-4">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
+                    👨‍⚕️
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Tableau de Bord</h2>
+                    <p class="text-gray-600 font-medium">Bienvenue Dr. ${sessionScope.userName}. Gérez vos consultations et vos patients.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
+            <!-- Consultations à voir aujourd'hui -->
+            <a href="${pageContext.request.contextPath}/doctor/waiting-patients" 
+               class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-200">
+                        ⏰
                     </div>
                     <div>
-                        <a href="${pageContext.request.contextPath}/doctor/view-consultation/${consultation.id}"
-                           class="btn btn-primary">Voir</a>
+                        <h3 class="text-3xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors duration-200">${waitingPatients.size()}</h3>
+                        <p class="text-gray-600 font-medium group-hover:text-orange-500 transition-colors duration-200">À voir aujourd'hui</p>
                     </div>
                 </div>
-            </c:forEach>
+                <div class="mt-3 text-sm text-gray-500 group-hover:text-orange-400 transition-colors duration-200">
+                    Patients enregistrés en attente
+                </div>
+            </a>
+
+            <!-- Consultations en cours -->
+            <a href="${pageContext.request.contextPath}/doctor/consultations-in-progress" 
+               class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-200">
+                        ⏳
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors duration-200">${inProgressConsultations.size()}</h3>
+                        <p class="text-gray-600 font-medium group-hover:text-amber-500 transition-colors duration-200">En cours</p>
+                    </div>
+                </div>
+                <div class="mt-3 text-sm text-gray-500 group-hover:text-amber-400 transition-colors duration-200">
+                    Vos consultations en cours
+                </div>
+            </a>
+
+            <!-- Consultations terminées -->
+            <a href="${pageContext.request.contextPath}/doctor/consultations-completed" 
+               class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-200">
+                        ✅
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-900 group-hover:text-green-600 transition-colors duration-200">${completedConsultations.size()}</h3>
+                        <p class="text-gray-600 font-medium group-hover:text-green-500 transition-colors duration-200">Terminées</p>
+                    </div>
+                </div>
+                <div class="mt-3 text-sm text-gray-500 group-hover:text-green-400 transition-colors duration-200">
+                    Vos consultations terminées
+                </div>
+            </a>
+
+            <!-- Consultations en attente spécialiste -->
+            <a href="${pageContext.request.contextPath}/doctor/consultations-waiting-specialist" 
+               class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-200">
+                        👨‍⚕️
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-900 group-hover:text-purple-600 transition-colors duration-200">${waitingForSpecialist.size()}</h3>
+                        <p class="text-gray-600 font-medium group-hover:text-purple-500 transition-colors duration-200">Attente spécialiste</p>
+                    </div>
+                </div>
+                <div class="mt-3 text-sm text-gray-500 group-hover:text-purple-400 transition-colors duration-200">
+                    En attente d'avis spécialiste
+                </div>
+            </a>
+
+            <!-- Réponses d'expertise reçues -->
+            <a href="${pageContext.request.contextPath}/doctor/my-expertise-requests" 
+               class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${completedExpertiseRequests.size() > 0 ? 'ring-2 ring-emerald-400 animate-pulse' : ''}">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-emerald-100 to-teal-200 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-200">
+                        ✅
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors duration-200">${completedExpertiseRequests.size()}</h3>
+                        <p class="text-gray-600 font-medium group-hover:text-emerald-500 transition-colors duration-200">Réponses reçues</p>
+                    </div>
+                </div>
+                <div class="mt-3 text-sm text-gray-500 group-hover:text-emerald-400 transition-colors duration-200">
+                    Avis d'experts disponibles
+                    <c:if test="${completedExpertiseRequests.size() > 0}">
+                        <span class="block font-bold text-emerald-600 animate-bounce">🔔 Nouvelles réponses !</span>
+                    </c:if>
+                </div>
+            </a>
+
         </div>
-    </c:if>
-</div>
+
+
+    </div>
 </body>
 </html>
