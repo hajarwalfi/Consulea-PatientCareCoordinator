@@ -110,14 +110,12 @@ public class NurseService {
     public List<Patient> getTodayPatients() {
         List<Patient> patients = patientDAO.findRegisteredToday();
         
-        // Utilisation de Stream API pour trier par heure d'arrivée (plus ancien au plus récent)
         return patients.stream()
                 .sorted((p1, p2) -> p1.getRegisteredAt().compareTo(p2.getRegisteredAt()))
                 .collect(java.util.stream.Collectors.toList());
     }
 
     public List<Patient> getTodayPatientsWithVitalSigns() {
-        // Récupérer les patients du jour avec tri par heure d'arrivée
         return getTodayPatients();
     }
 
@@ -127,8 +125,7 @@ public class NurseService {
 
     public VitalSigns getLatestVitalSigns(Patient patient) {
         List<VitalSigns> vitalSignsList = vitalSignsDAO.findByPatient(patient);
-        
-        // Utilisation de Stream API pour récupérer le plus récent
+
         return vitalSignsList.stream()
                 .sorted((v1, v2) -> v2.getMeasuredAt().compareTo(v1.getMeasuredAt()))
                 .findFirst()
@@ -158,11 +155,9 @@ public class NurseService {
             throw new IllegalArgumentException("Nurse cannot be null");
         }
 
-        // Récupérer les derniers signes vitaux existants
         VitalSigns existingVitalSigns = getLatestVitalSigns(patient);
 
         if (existingVitalSigns != null) {
-            // Mettre à jour seulement les champs remplis, conserver les autres
             if (bloodPressure != null && !bloodPressure.trim().isEmpty()) {
                 existingVitalSigns.setBloodPressure(bloodPressure.trim());
             }
@@ -188,13 +183,11 @@ public class NurseService {
                 existingVitalSigns.setObservations(observations.trim());
             }
 
-            // Mettre à jour la date et l'infirmier qui a modifié
             existingVitalSigns.setMeasuredBy(nurse);
             existingVitalSigns.setMeasuredAt(java.time.LocalDateTime.now());
 
             return vitalSignsDAO.update(existingVitalSigns);
         } else {
-            // Si aucun signe vital existant, créer un nouveau (premier enregistrement)
             return recordVitalSigns(patient, nurse, bloodPressure, heartRate, temperature,
                     respiratoryRate, weight, height, oxygenSaturation, observations);
         }
