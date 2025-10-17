@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom components for the medical application */
+@layer components {
+    .card {
+        @apply bg-white rounded-xl shadow-sm border border-gray-100;
+    }
+    
+    .card-hover {
+        @apply hover:shadow-lg hover:-translate-y-1 transition-all duration-300;
+    }
+    
+    .btn-primary {
+        @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg;
+    }
+    
+    .btn-secondary {
+        @apply bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-all duration-200;
+    }
+    
+    .navbar-gradient {
+        @apply bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700;
+    }
+    
+    .medical-icon {
+        @apply w-12 h-12 flex items-center justify-center rounded-xl text-2xl;
+    }
+    
+    .stat-card {
+        @apply bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200;
+    }
+    
+    .badge-success {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800;
+    }
+    
+    .badge-warning {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-800;
+    }
+    
+    .badge-info {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800;
+    }
+    
+    .form-input {
+        @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+    }
+    
+    .form-label {
+        @apply block text-sm font-semibold text-gray-700 mb-2;
+    }
+}

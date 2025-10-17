@@ -1,3 +1,4 @@
+com\consulea\entity\TimeSlot.class
 com\consulea\dao\ConsultationDAO.class
 com\consulea\enums\Role.class
 com\consulea\entity\VitalSigns.class
@@ -6,12 +7,19 @@ com\consulea\util\DatabaseTest.class
 com\consulea\dao\ConsultationMedicalActDAO.class
 com\consulea\service\DoctorService.class
 com\consulea\entity\Patient.class
+com\consulea\dao\TimeSlotDAO.class
 com\consulea\entity\ConsultationMedicalAct.class
 com\consulea\service\NurseService.class
 com\consulea\servlet\LogoutServlet.class
+com\consulea\servlet\SpecialistServlet.class
 com\consulea\dao\UserDAO.class
 com\consulea\entity\Consultation.class
+com\consulea\dao\ExpertiseRequestDAO.class
+com\consulea\enums\Priority.class
 com\consulea\service\AuthenticationService.class
+com\consulea\enums\Specialty.class
+com\consulea\service\SpecialistService.class
+com\consulea\entity\Specialist.class
 com\consulea\entity\User.class
 com\consulea\enums\PatientStatus.class
 com\consulea\dao\GenericDAO.class
@@ -19,8 +27,12 @@ com\consulea\util\JPAUtil.class
 com\consulea\servlet\NurseServlet.class
 com\consulea\enums\ConsultationStatus.class
 com\consulea\dao\PatientDAO.class
+com\consulea\entity\ExpertiseRequest.class
 com\consulea\servlet\LoginServlet$1.class
 com\consulea\dao\VitalSignsDAO.class
+com\consulea\dao\SpecialistDAO.class
+com\consulea\dao\ExpertiseRequestDAO$1.class
 com\consulea\entity\MedicalAct.class
 com\consulea\servlet\LoginServlet.class
 com\consulea\dao\MedicalActDAO.class
+com\consulea\enums\ExpertiseStatus.class
