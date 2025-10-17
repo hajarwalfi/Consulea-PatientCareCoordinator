@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.consulea.servlet.LoginServletTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.478 s <<< FAILURE! -- in com.consulea.servlet.LoginServletTest
+com.consulea.servlet.LoginServletTest.doPost_shouldRedirectToLogin_forUnknownRole -- Time elapsed: 1.358 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "jakarta.servlet.RequestDispatcher.forward(jakarta.servlet.ServletRequest, jakarta.servlet.ServletResponse)" because the return value of "jakarta.servlet.http.HttpServletRequest.getRequestDispatcher(String)" is null
+	at com.consulea.servlet.LoginServlet.doPost(LoginServlet.java:65)
+	at com.consulea.servlet.LoginServletTest.doPost_shouldRedirectToLogin_forUnknownRole(LoginServletTest.java:236)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
